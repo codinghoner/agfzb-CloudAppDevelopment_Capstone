@@ -38,7 +38,7 @@
                             <input type="text" class="form-control" placeholder="Username" name="username" >
                             <input type="password" class="form-control" placeholder="Password" name="psw" >
                             <button class="btn btn-primary" type="submit">Login</button>
-                            <a class="btn btn-link" href="https://codinghoner-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/registration">Register Now</a>
+                            <a class="btn btn-link" href="https://codinghoner-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/registration">Register Now</a>
                         </div>
                     </form>
                 </li>
@@ -46,25 +46,9 @@
             </ul>
         </div>
     </nav>
-    <form action="{}" method="post">
-        {% csrf_token %}
-        <div class="container"> <!--Style root div with .container class -->
-          <h1>Login</h1>
-          <div class="form-group"> <!--Style second div with .form-group class -->
-            <label for="username"><b>User Name</b></label>
-            <input id="username" class = "form-control" type="text" placeholder="Enter User Name: " name="username" required> <!--Style input with .form-control class -->
-            <label for="psw"><b>Password</b></label>
-            <input id="psw" class = "form-control" type="password"  placeholder="Enter Password: " name="psw" required> <!--Style input with .form-control class -->
-          </div>
-          {% if message %}
-            <div class="alert alert-warning"> <!--Style the message paragraph with .alert and .alert-warning class -->
-              {{ message }}
-            </div>
-          {% endif %}
-          <button class="btn btn-primary" type="submit">Login</button> <!--Style button with .btn and .btn-primary class -->
-        </div>
-      </form>
-
+    {% if user.is_authenticated %}
+    <p>Username: {{user.username}}, First name: {{user.first_name}}, Last name: {{user.last_name}} </p>
+    {% endif %}
     </body>
 
 </html>
