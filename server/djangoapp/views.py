@@ -29,8 +29,11 @@ def contact(request):
 # Create a `login_request` view to handle sign in request
 def login_request(request):
     context = {}
+    if request.method == "GET":
+        return render(request, 'djangoapp/login.html', context)
     # Handles POST request
     if request.method == "POST":
+
         # Get username and password from request.POST dictionary
         username = request.POST['username']
         password = request.POST['psw']
@@ -39,12 +42,13 @@ def login_request(request):
         if user is not None:
             # If user is valid, call login method to login current user
             login(request, user)
-            return redirect('djangoapp')
+            return redirect('djangoapp/index.html')
         else:
             # If not, return to login page again
-            return render(request, 'djangoapp', context)
+            return render(request, 'djangoapp/login.html', context)
     else:
-        return render(request, 'djangoapp', context)
+        login(request, user)
+        return render(request, 'djangoapp/login.html', context)
 
 # Create a `logout_request` view to handle sign out request
 def logout_request(request):
@@ -53,7 +57,7 @@ def logout_request(request):
     # Logout user in the request
     logout(request)
     # Redirect user back to course list view
-    return redirect('djangoapp/logout.html')
+    return redirect('djangoapp:index')
 
 # Create a `registration_request` view to handle sign up request
 def registration_request(request):
@@ -79,10 +83,11 @@ def registration_request(request):
         # If it is a new user
         if not user_exist:
             # Create user in auth_user table
-            user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,password=password)
+            user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,
+                                            password=password)
             # Login the user and redirect to course list page
             login(request, user)
-            return redirect("https://codinghoner-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp")
+            return redirect("djangoapp:index")
         else:
             return render(request, 'djangoapp/registration.html', context)
 

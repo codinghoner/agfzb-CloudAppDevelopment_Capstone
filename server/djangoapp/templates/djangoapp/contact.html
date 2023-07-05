@@ -25,20 +25,20 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    <div class="dropdown" href="https://codinghoner-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/">
-                        <button class="dropbtn">{{user.username}}</button>
-                        <a class="dropdown-content" href="https://codinghoner-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/logout">Logout</a>
+                <div class="rightalign">
+                        <a class="btn btn-link" href="https://codinghoner-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/account">{{user.username}}</a>
+                        <a class="btn btn-link" href="https://codinghoner-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/logout">Logout</a>
                         </div>
              </div>
                 {% else %}
                 <li>
-                    <form class="form-inline" action="{}" method="post">
+                    <form class="form-inline" action="login" method="post">
                         {% csrf_token %}
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Username" name="username" >
                             <input type="password" class="form-control" placeholder="Password" name="psw" >
                             <button class="btn btn-primary" type="submit">Login</button>
-                            <a class="btn btn-link" href="https://codinghoner-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/registration">Register Now</a>
+                            <a class="btn btn-link" href="https://codinghoner-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/registration">Register</a>
                         </div>
                     </form>
                 </li>
